@@ -1,0 +1,82 @@
+{
+  "version": 3,
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "name": "krakend-impl",
+  "port": 5000,
+  "endpoints": [
+    {
+      "endpoint": "/hello",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/api",
+          "method": "GET",
+          "host": [
+            "http://hello-service:4000"
+          ],
+          "extra_config": {
+            "github.com/devopsfaith/krakend/http": {
+              "return_error_details": "hello"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hello/world",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/api/world",
+          "method": "GET",
+          "host": [
+            "http://hello-service:4000"
+          ],
+          "extra_config": {
+            "github.com/devopsfaith/krakend/http": {
+              "return_error_details": "hello"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/user",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/api",
+          "method": "GET",
+          "host": [
+            "http://user-service:4001"
+          ],
+          "extra_config": {
+            "github.com/devopsfaith/krakend/http": {
+              "return_error_details": "user"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/user/get",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/api/get",
+          "method": "GET",
+          "host": [
+            "http://user-service:4001"
+          ],
+          "extra_config": {
+            "github.com/devopsfaith/krakend/http": {
+              "return_error_details": "user"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
